@@ -1,12 +1,3 @@
-// class Node {
-//   constructor(value, left = null, right = null, size = 0) {
-//     this.value = value;
-//     this.left = left;
-//     this.right = right;
-//     this.size = size;
-//   }
-// }
-
 let leftside = null;
 let rightside = null;
 
@@ -90,14 +81,18 @@ const leftCase = (node, size) => {
 const rightCase = (node) => {
   const right = node.right;
   node.right = null;
-  node.size = node.size - (right ? right.size : 0);
 
+  recalculateSize(node);
   joinLeftSide(node);
 
   return right;
 };
 
 function split(node, k) {
+  if (!node) {
+    return [null, null];
+  }
+
   let currentNode = node;
   let currentSize = k;
 
@@ -118,23 +113,3 @@ function split(node, k) {
 
   return [leftside, rightside];
 }
-
-// function test() {
-//   const node10 = new Node(858, null, null, 1);
-//   const node9 = new Node(701, null, null, 1);
-//   const node8 = new Node(763, node9, node10, 3);
-//   const node7 = new Node(442, null, null, 6);
-//   const node6 = new Node(302, null, node7, 6);
-//   const node5 = new Node(130, null, null, 3);
-//   const node4 = new Node(220, node5, node6, 1);
-//   const node3 = new Node(545, node4, node8, 1);
-//   const node2 = new Node(31, null, node3, 2);
-//   const node1 = new Node(867, node2, null, 1);
-
-//   const res = split(node1, 7);
-
-//   console.assert(res[0].size === 4);
-//   console.assert(res[1].size === 2);
-// }
-
-// test();
